@@ -1,20 +1,22 @@
 import type { NextAuthConfig } from 'next-auth';
 
 export const authConfig = {
-  debug: true,
+  debug: false,
   pages: {
     signIn: '/login',
   },
   callbacks: {
-    // authorized는 middle 에서 호출된다. 로그인 했으면 /dashboard로 리디렉션 , 
-    authorized({ auth, request: { nextUrl }}) {
-      console.log('auth.config.ts...authorized running...')
+    authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
-
-      return isOnDashboard ? isLoggedIn : (isLoggedIn ? Response.redirect
-        (new URL('/dashboard', nextUrl)) : true)
-    }
+      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
+      if (isOnDashboard) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL('/dashboard', nextUrl));
+      }
+      return true;
+    },
   },
-  providers: [], // Providers are added in auth.ts
+  providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;
