@@ -4,6 +4,8 @@ import {z} from "zod";
 import { sql } from '@vercel/postgres'
 import { revalidatePath } from "next/cache";
 import {redirect} from "next/navigation";
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
 const FormSchema = z.object({
   id: z.string(),
@@ -116,4 +118,26 @@ export async function updateInvoice(
 
   revalidatePath('/dashboard/invoices');
   redirect('/dashboard/invoices');
+}
+
+// useFormStage hook을 통해서 form의 상태를 관리할 수 있습니다.
+// 여기서 발생하는 error는 errorMessage에 담기게 됩니다.
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    // @/auth 의 signIn 함수를 호출하여 로그인을 시도합니다.
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
 }
