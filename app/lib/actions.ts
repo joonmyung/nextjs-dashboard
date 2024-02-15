@@ -130,6 +130,9 @@ export async function authenticate(
     // @/auth 의 signIn 함수를 호출하여 로그인을 시도합니다.
     await signIn('credentials', formData);
   } catch (error) {
+
+    console.log(error);
+    
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
