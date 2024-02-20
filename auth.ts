@@ -4,10 +4,12 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { getUser } from '@/app/lib/data';
+import { User } from './app/lib/definitions';
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   secret: process.env.AUTH_SECRET,
+  session: { strategy: "jwt" },
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -46,11 +48,14 @@ export const { auth, signIn, signOut } = NextAuth({
 
       return true;
     },
-    async session({ session, token, user }) {
-      console.log("session callback invoked")
-      console.log(session)
-      console.log(token)
-      console.log(user)
+    async session({ session, token }) {
+      console.log("session callback invoked");
+      console.log(session);
+      console.log(token);
+
+      if (token.sub && session.user ) {
+        session.user.id = token.sub;
+      }
 
       return session;
     },

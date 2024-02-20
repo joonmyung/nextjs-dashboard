@@ -7,3 +7,11 @@
 //         return await spInvoke("call sp-product_info_imported-migrate-v1(?, ?)", [params.pCallDate, params.pStatusCode]);
 //     }
 // }
+
+import * as db from "./dbMpm"
+import { EmailVerificationType } from "./enums"
+
+export const test = async () => {
+  
+  db.OperatorEmailVerifications.findOneV1
+}

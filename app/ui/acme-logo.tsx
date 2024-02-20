@@ -6,8 +6,8 @@ export default function AcmeLogo() {
     <div
       className={`${roboto.className} flex flex-row items-center leading-none text-white`}
     >
-      <GlobeAltIcon className="h-12 w-12 rotate-[15deg]" />
-      <p className="text-[44px]">Aimee</p>
+      <GlobeAltIcon className="h-22 w-22 rotate-[15deg]" />
+      <p className="text-[23px]">Aimee Dashboard</p>
     </div>
   );
 }
