@@ -1,9 +1,10 @@
 import '@/app/ui/global.css'
 import React from "react";
-import { notoSansKr } from "@/app/ui/fonts";
+import { pretendard } from "@/app/ui/fonts";
 import {Analytics} from "@vercel/analytics/react";
 import NextTopLoader from "nextjs-toploader";
 import { Metadata} from "next";
+
 
 export const metadata: Metadata = {
   title: 'Aimee Dashboard',
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${notoSansKr.className} antialiased`}>
+      <body className={`${pretendard.className} antialiased`}>
       <NextTopLoader
         color="#2299DD"
         initialPosition={0.08}

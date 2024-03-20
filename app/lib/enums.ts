@@ -1,11 +1,11 @@
 export enum AgeGroup { // 연령대
   UNDER_10 = 0,
-  10_19 = 1,
-  20_29 = 2,
-  30_39 = 3,
-  40_49 = 4,
-  50_59 = 5,
-  60_OR_OVER = 6
+  A10_19 = 1,
+  A20_29 = 2,
+  A30_39 = 3,
+  A40_49 = 4,
+  A50_59 = 5,
+  A60_OR_OVER = 6
 }
 export enum AuthProvider { // 인증 제공자
   KAKAO = 0,

@@ -1,9 +1,10 @@
 import AcmeLogo from '@/app/ui/acme-logo';
 import styles from '@/app/ui/home.module.css'
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import { roboto } from '@/app/ui/fonts'
 import Link from 'next/link'
 import Image from 'next/image'
+
+import { notoSansKr } from '@/app/ui/fonts';
 
 export default function Page() {
   return (
@@ -16,7 +17,7 @@ export default function Page() {
           <div
             className={styles.shape}
           />
-          <p className={`${roboto.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}>
+          <p className={`${notoSansKr.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}>
             <strong>에이미랩스에 오신것을 환영합니다.</strong> <br/>This is the example for the{' '}
             <a href="https://nextjs.org/learn/" className="text-blue-500">
               Next.js Learn Course
