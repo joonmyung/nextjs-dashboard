@@ -81,7 +81,6 @@ export async function deleteInvoice(id: string) {
       message: 'Database Error: Failed to Delete Invoice',
     }
   }
-
   revalidatePath('/dashboard/invoices')
 }
 
@@ -126,9 +125,17 @@ export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
+
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+
   try {
     // @/auth 의 signIn 함수를 호출하여 로그인을 시도합니다.
-    await signIn('credentials', formData);
+    await signIn('credentials', {
+      email,
+      password,
+      redirect: true,
+    });
   } catch (error) {
 
     console.log(error);
